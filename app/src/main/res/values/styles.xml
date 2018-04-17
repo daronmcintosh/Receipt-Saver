@@ -1,11 +1,19 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="Light" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">@color/lightColorPrimary</item>
+    </style>
+
+    <style name="Dark" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+    </style>
+
+    <style name="FontCasual">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">casual</item>
+    </style>
+
+    <style name="FontCursive">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">cursive</item>
     </style>
 
 </resources>

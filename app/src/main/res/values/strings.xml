@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">Receipt Saver</string>
+    <string name="pref_themes">Themes</string>
+    <string name="pref_font">Font</string>
+    <string name="pref_currency">Currency</string>
+    <string name="pref_select_theme">Select a Theme</string>
+    <string name="pref_select_font">Select a Font</string>
+    <string name="pref_select_currency">Select a Currency</string>
+    <string name="pref_theme_default">Light</string>
+    <string name="pref_currency_default">Dollar</string>
+    <string name="pref_font_default">Casual</string>
+    <string name="settings">Settings</string>
+
+    <string-array name="action_list">
+        <item>Stream a song</item>
+        <item>Favorites</item>
+    </string-array>
+
+    <string-array name="pref_themes_entries">
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+    <string-array name="pref_currency_entries">
+        <item>Dollar</item>
+        <item>Euro</item>
+    </string-array>
+
+    <string-array name="pref_font_entries">
+        <item>Casual</item>
+        <item>Cursive</item>
+    </string-array>
+
+
 </resources>
