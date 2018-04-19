@@ -5,10 +5,19 @@ import java.util.Date;
 public class Receipt {
     private int _id;
     private String name, category, description;
-    private Date date;
+    private String date;
     private double total;
 
-    public int get_id() {
+    public Receipt(int id, String name, String category, String date, double total, String description) {
+        this._id = id;
+        this.name = name;
+        this.category = category;
+        this.date = date;
+        this.total = total;
+        this.description = description;
+    }
+
+    public int getId() {
         return _id;
     }
 
@@ -24,11 +33,13 @@ public class Receipt {
         return description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     public double getTotal() {
         return total;
     }
+
+
 }

@@ -9,6 +9,7 @@ public class ReceiptDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "ReceiptInfo"; // the name of our database
     public static final int DB_VERSION = 1; // the version of the database
+    public static final String TABLE_NAME = "RECEIPTINFO"; // table name
 
     ReceiptDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -34,7 +35,7 @@ public class ReceiptDatabaseHelper extends SQLiteOpenHelper {
                     + "TOTAL REAL, "
                     + "DESCRIPTION TEXT);");
             insertReceipt(db, "Walmart", "Grocery", "4/17/2018", 150.50, "Weekly grocery");
-            insertReceipt(db, "Chinese Restaurant", "Food", "4/14/2018", 25.20, "Weekly grocery");
+            insertReceipt(db, "Chinese Restaurant", "Food", "4/14/2018", 25.20, "Takeout dinner");
             insertReceipt(db, "Auto Shop", "Maintenance", "4/14/2018", 43.15, "Oil change");
         }
     }
@@ -46,6 +47,6 @@ public class ReceiptDatabaseHelper extends SQLiteOpenHelper {
         receiptValues.put("DATE", date);
         receiptValues.put("TOTAL", total);
         receiptValues.put("DESCRIPTION", description);
-        db.insert("RECEIPTINFO", null, receiptValues);
+        db.insert(TABLE_NAME, null, receiptValues);
     }
 }
