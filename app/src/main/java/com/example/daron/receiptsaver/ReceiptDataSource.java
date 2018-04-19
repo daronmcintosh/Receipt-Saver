@@ -6,14 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.util.Log;
-import android.widget.CursorAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class ReceiptDataSource {
 
     private final String LOG_TAG = this.getClass().getSimpleName();
@@ -23,8 +16,6 @@ public class ReceiptDataSource {
     private SQLiteDatabase database;
     private ReceiptDatabaseHelper dbHelper;
     private Context context;
-//    private String[] allColumns = {"_id",
-//            "NAME"};
 
     public ReceiptDataSource(Context context) {
         dbHelper = new ReceiptDatabaseHelper(context);
@@ -51,16 +42,11 @@ public class ReceiptDataSource {
         contentValues.put("TOTAL", receipt.getTotal());
         contentValues.put("DESCRIPTION", receipt.getDescription());
         database.insert(ReceiptDatabaseHelper.TABLE_NAME, null, contentValues);
-//        Cursor cursor = database.query("RECEIPTINFO", allColumns,   "_id =", new String[]{Long.toString(insertID)},
-//                null, null, null, null);
-//        cursor.moveToFirst();
-//        Comment newComment = cursorToComment(cursor);
-//        return newComment;
     }
 
     public void deleteReceipt(Receipt receipt) {
         long id = receipt.getId();
-        database.delete(ReceiptDatabaseHelper.TABLE_NAME, "_id =" + id, null);
+        database.delete(ReceiptDatabaseHelper.TABLE_NAME, "_id =?", new String[]{Long.toString(id)});
     }
 
     public Receipt getReceipt(int id) {
@@ -83,24 +69,4 @@ public class ReceiptDataSource {
             return null;
         }
     }
-//    public List<Comment> getAllComments() {
-//        List<Comment> comments = new ArrayList<Comment>();
-//        Cursor cursor = database.query(MySQLiteHelper.TABLE_COMMENTS, allColumns, null, null, null, null, null);
-//        cursor.moveToFirst();
-//        while (cursor.isAfterLast()) {
-//            Comment comment = cursorToComment(cursor);
-//            comments.add(comment);
-//            cursor.moveToNext();
-//        }
-//        return comments;
-//    }
-
-//    private Comment cursorToComment(Cursor cursor) {
-//        Comment comment = new Comment();
-//        if (cursor.getCount() > 0) {
-//            comment.setId(cursor.getLong(0));
-//            comment.setComment(cursor.getString(1));
-//        }
-//        return comment;
-//    }
 }

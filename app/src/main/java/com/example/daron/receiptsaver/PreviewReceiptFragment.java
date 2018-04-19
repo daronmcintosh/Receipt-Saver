@@ -30,6 +30,7 @@ public class PreviewReceiptFragment extends Fragment {
         category.setText(receipt.getCategory());
         date.setText(receipt.getDate());
         description.setText(receipt.getDescription());
+        receiptDataSource.close();
         // Inflate the layout for this fragment
         return view;
     }
