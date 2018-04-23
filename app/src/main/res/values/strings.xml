@@ -10,10 +10,15 @@
     <string name="pref_currency_default">Dollar</string>
     <string name="pref_font_default">Casual</string>
     <string name="settings">Settings</string>
+    <string name="name">Name of Receipt:</string>
+    <string name="name_prompt">Enter name of receipt</string>
     <string name="total">Total:</string>
     <string name="category">Category:</string>
     <string name="date">Date (mm/dd/yy):</string>
     <string name="description">Description:</string>
+    <string name="picture">Take a picture</string>
+    <string name="save">Save</string>
+    <string name="add">Add a Receipt</string>
 
 
     <string-array name="action_list">

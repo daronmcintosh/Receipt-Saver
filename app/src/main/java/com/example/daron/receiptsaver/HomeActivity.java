@@ -6,9 +6,12 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class HomeActivity extends AppCompatActivity {
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,20 +25,15 @@ public class HomeActivity extends AppCompatActivity {
         setApplicationFont(font);
         setContentView(R.layout.activity_home);
 
-        showFavorites();
-
+        showFavoritesFragment();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
-    public void onClickSettings(View view) {
-        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-        HomeActivity.this.startActivity(intent);
-    }
-
-    public void showFavorites() {
+    public void showFavoritesFragment() {
         ReceiptListFragment receiptListFragment = new ReceiptListFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, receiptListFragment)
-                .addToBackStack(null)
                 .commit();
     }
 
@@ -56,4 +54,26 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                HomeActivity.this.startActivity(intent);
+                return true;
+            case R.id.action_add:
+                intent = new Intent(HomeActivity.this, AddReceiptActivity.class);
+                HomeActivity.this.startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
