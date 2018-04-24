@@ -24,4 +24,6 @@ public class AddReceiptFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_add_receipt, container, false);
     }
 
+
+
 }

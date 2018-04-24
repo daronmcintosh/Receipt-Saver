@@ -13,52 +13,92 @@
         <TableRow>
             <TextView
                 android:id="@+id/name"
+                android:padding="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name" />
 
             <EditText
-                android:id="@+id/linkInput"
+                android:id="@+id/nameInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:hint="@string/name_prompt" />
         </TableRow>
 
+
         <TableRow>
             <TextView
                 android:id="@+id/category"
+                android:padding="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category" />
 
+            <EditText
+                android:id="@+id/categoryInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="@string/category_prompt" />
         </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/date"
+                android:padding="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date" />
+            <EditText
+                android:id="@+id/dateInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                tools:ignore="TextFields"
+                android:hint="@string/category_prompt"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/total"
+                android:padding="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total" />
+            <EditText
+                android:id="@+id/totalInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                tools:ignore="TextFields"
+                android:hint="@string/total_prompt"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/description"
+                android:padding="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description" />
+            <EditText
+                android:id="@+id/descriptionInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                tools:ignore="TextFields"
+                android:hint="@string/description_prompt"/>
+        </TableRow>
+
+
     </TableLayout>
 
-
-
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/date" />
-
-    <TextView
-        android:id="@+id/total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/total" />
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/description" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="top|center"
         android:orientation="horizontal">
 
         <ImageButton
