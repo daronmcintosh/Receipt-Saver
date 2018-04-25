@@ -1,7 +1,5 @@
 package com.example.daron.receiptsaver;
 
-import java.util.Date;
-
 public class Receipt {
     private int _id;
     private String name, category, description;
@@ -10,6 +8,14 @@ public class Receipt {
 
     public Receipt(int id, String name, String category, String date, double total, String description) {
         this._id = id;
+        this.name = name;
+        this.category = category;
+        this.date = date;
+        this.total = total;
+        this.description = description;
+    }
+
+    public Receipt(String name, String category, String date, double total, String description) {
         this.name = name;
         this.category = category;
         this.date = date;
