@@ -114,6 +114,7 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/takeAPicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/picture"
@@ -125,6 +126,12 @@
             android:layout_height="wrap_content"
             android:text="@string/save" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"/>
 
 
 </LinearLayout>
