@@ -58,6 +58,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actionbar_menu, menu);
+        menu.findItem(R.id.action_delete).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 

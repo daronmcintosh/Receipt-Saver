@@ -44,10 +44,10 @@ public class ReceiptDataSource {
         database.insert(ReceiptDatabaseHelper.TABLE_NAME, null, contentValues);
     }
 
-//    public void deleteReceipt(Receipt receipt) {
-//        long id = receipt.getId();
-//        database.delete(ReceiptDatabaseHelper.TABLE_NAME, "_id =?", new String[]{Long.toString(id)});
-//    }
+    public void deleteReceipt(Receipt receipt) {
+        long id = receipt.getId();
+        database.delete(ReceiptDatabaseHelper.TABLE_NAME, "_id =?", new String[]{Long.toString(id)});
+    }
 
     public Receipt getReceipt(int id) {
         Receipt receipt;

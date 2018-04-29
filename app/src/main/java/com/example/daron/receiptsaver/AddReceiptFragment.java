@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -23,11 +25,9 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
 
     private ReceiptDataSource receiptDataSource;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-
-    public AddReceiptFragment() {
-        // Required empty public constructor
-    }
-
+    private EditText nameView, categoryView, dateView, totalView, descriptionView;
+    private String name, category, date, description;
+    private Double total;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,34 +41,39 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
         actionBar.setTitle(R.string.add);
         saveButton.setOnClickListener(this);
         takeAPicButton.setOnClickListener(this);
-        return view;
 
+        nameView = (EditText) view.findViewById(R.id.receiptNameInput);
+        categoryView = (EditText) view.findViewById(R.id.categoryInput);
+        dateView = (EditText) view.findViewById(R.id.dateInput);
+        totalView = (EditText) view.findViewById(R.id.totalInput);
+        descriptionView = (EditText) view.findViewById(R.id.descriptionInput);
+
+        return view;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.save:
-                EditText nameView = (EditText) getView().findViewById(R.id.nameInput);
-                EditText categoryView = (EditText) getView().findViewById(R.id.categoryInput);
-                EditText dateView = (EditText) getView().findViewById(R.id.dateInput);
-                EditText totalView = (EditText) getView().findViewById(R.id.totalInput);
-                EditText descriptionView = (EditText) getView().findViewById(R.id.descriptionInput);
-
-                String name = nameView.getText().toString();
-                String category = categoryView.getText().toString();
-                String date = dateView.getText().toString();
-                Double total = Double.parseDouble(totalView.getText().toString());
-                String description = descriptionView.getText().toString();
-
-                Receipt newReceipt = new Receipt(name, category, date, total, description);
-                receiptDataSource.open();
-                receiptDataSource.createReceipt(newReceipt);
-                receiptDataSource.close();
-                Intent intent = new Intent(getContext(), HomeActivity.class);
-                startActivity(intent);
+//                if (!textFieldsAreEmpty()) {
+                    name = nameView.getText().toString();
+                    category = categoryView.getText().toString();
+                    date = dateView.getText().toString();
+                    total = Double.parseDouble(totalView.getText().toString());
+                    description = descriptionView.getText().toString();
+                    Receipt newReceipt = new Receipt(name, category, date, total, description);
+                    receiptDataSource.open();
+                    receiptDataSource.createReceipt(newReceipt);
+                    receiptDataSource.close();
+                    Intent intent = new Intent(getContext(), HomeActivity.class);
+                    startActivity(intent);
+//                } else {
+//                    Toast.makeText(getContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+//                }
+                break;
             case R.id.takeAPicture:
                 dispatchTakePictureIntent();
+                break;
         }
 
     }
@@ -91,4 +96,13 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
             imageView.setImageBitmap(imageBitmap);
         }
     }
+
+//    public boolean textFieldsAreEmpty() {
+//        name = nameView.getText().toString();
+//        category = categoryView.getText().toString();
+//        date = dateView.getText().toString();
+//        total = Double.parseDouble(totalView.getText().toString());
+//        description = descriptionView.getText().toString();
+//        return name.equals("") && category.equals("") && date.equals("") && total.toString().equals("") && description.equals("");
+//    }
 }
