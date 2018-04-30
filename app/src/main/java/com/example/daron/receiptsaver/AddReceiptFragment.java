@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +24,11 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddReceiptFragment extends Fragment implements View.OnClickListener {
 
+    private final String LOG_TAG = this.getClass().getSimpleName();
     private ReceiptDataSource receiptDataSource;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private EditText nameView, categoryView, dateView, totalView, descriptionView;
-    private String name, category, date, description;
-    private Double total;
+    private String name, category, date, total, description;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,21 +56,22 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.save:
-//                if (!textFieldsAreEmpty()) {
+                if (!textFieldsAreEmpty()) {
                     name = nameView.getText().toString();
                     category = categoryView.getText().toString();
                     date = dateView.getText().toString();
-                    total = Double.parseDouble(totalView.getText().toString());
+                    total = totalView.getText().toString();
                     description = descriptionView.getText().toString();
-                    Receipt newReceipt = new Receipt(name, category, date, total, description);
+                    Receipt newReceipt = new Receipt(name, category, date, Double.parseDouble(total), description);
                     receiptDataSource.open();
                     receiptDataSource.createReceipt(newReceipt);
                     receiptDataSource.close();
                     Intent intent = new Intent(getContext(), HomeActivity.class);
                     startActivity(intent);
-//                } else {
-//                    Toast.makeText(getContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-//                }
+                } else {
+                    Log.e(LOG_TAG, Boolean.toString(!textFieldsAreEmpty()));
+                    Toast.makeText(getContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.takeAPicture:
                 dispatchTakePictureIntent();
@@ -97,12 +99,12 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
         }
     }
 
-//    public boolean textFieldsAreEmpty() {
-//        name = nameView.getText().toString();
-//        category = categoryView.getText().toString();
-//        date = dateView.getText().toString();
-//        total = Double.parseDouble(totalView.getText().toString());
-//        description = descriptionView.getText().toString();
-//        return name.equals("") && category.equals("") && date.equals("") && total.toString().equals("") && description.equals("");
-//    }
+    public boolean textFieldsAreEmpty() {
+        name = nameView.getText().toString();
+        category = categoryView.getText().toString();
+        date = dateView.getText().toString();
+        total = totalView.getText().toString();
+        description = descriptionView.getText().toString();
+        return name.trim().length() == 0 || category.trim().length() == 0 || date.trim().length() == 0 || total.trim().length() == 0 || description.trim().length() == 0;
+    }
 }
