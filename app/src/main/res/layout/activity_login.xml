@@ -20,65 +20,31 @@
         android:layout_height="wrap_content"
         android:text="@string/DropBoxInfo"
         android:textAlignment="center"
+        android:paddingTop="50dp"
+        android:paddingBottom="50dp"
         android:textSize="24sp"
         android:textStyle="bold" />
-
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:text="@string/email"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/emailInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/email_prompt"
-                android:inputType="textEmailAddress" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:text="@string/password"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/descriptionInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/password_prompt"
-                android:inputType="text"
-                tools:ignore="TextFields" />
-        </TableRow>
-
-
-    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_vertical|center"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/logIn" />
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rectangle_rounded"
+            android:drawableRight="@drawable/dropbox_icon"
+            android:text="@string/logIn"
+            android:paddingRight="30dp"
+            android:paddingLeft="20dp"
+            android:textColor="@android:color/white"
+
+            android:textSize="12sp" />
+
+
     </LinearLayout>
 
 </LinearLayout>

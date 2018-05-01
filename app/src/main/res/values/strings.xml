@@ -52,7 +52,7 @@
     <string name="email_prompt">Enter email adress</string>
     <string name="password">Password:</string>
     <string name="password_prompt">Enter Password</string>
-    <string name="logIn">Login</string>
+    <string name="logIn">DropBox Sign In</string>
     <string name="DropBoxInfo">Use your DropBox \n account to upload your \n receipts</string>
 
 
