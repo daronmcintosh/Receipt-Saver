@@ -41,6 +41,7 @@ public class ReceiptDataSource {
         contentValues.put("DATE", receipt.getDate());
         contentValues.put("TOTAL", receipt.getTotal());
         contentValues.put("DESCRIPTION", receipt.getDescription());
+        contentValues.put("FILENAME", receipt.getFilename());
         database.insert(ReceiptDatabaseHelper.TABLE_NAME, null, contentValues);
     }
 

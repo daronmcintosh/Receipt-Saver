@@ -1,16 +1,21 @@
 package com.example.daron.receiptsaver;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+import com.dropbox.core.android.Auth;
+import com.dropbox.core.v2.users.FullAccount;
+import com.example.daron.receiptsaver.dropbox.DropboxActivity;
+import com.example.daron.receiptsaver.dropbox.DropboxClientFactory;
+import com.example.daron.receiptsaver.dropbox.GetCurrentAccountTask;
+
+public class LoginActivity extends DropboxActivity {
 
 
     @Override
@@ -23,15 +28,15 @@ public class LoginActivity extends AppCompatActivity {
         setApplicationTheme(theme);
         setApplicationFont(font);
         setContentView(R.layout.activity_login);
-        Button loginBtn = (Button) findViewById(R.id.loginButton);
+    }
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                LoginActivity.this.startActivity(intent);
-            }
-        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (hasToken()) {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            LoginActivity.this.startActivity(intent);
+        }
     }
 
     public void setApplicationTheme(String theme) {
@@ -50,4 +55,23 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void loadData() {
+        new GetCurrentAccountTask(DropboxClientFactory.getClient(), new GetCurrentAccountTask.Callback() {
+            @Override
+            public void onComplete(FullAccount result) {
+                Toast.makeText(getApplicationContext(), "Signed in as: " + result.getEmail(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e(getClass().getName(), "Failed to get account details.", e);
+            }
+        }).execute();
+    }
+
+    public void logInDropbox(View view){
+        Auth.startOAuth2Authentication(LoginActivity.this, getString(R.string.app_key));
+
+    }
 }

@@ -21,6 +21,8 @@
     <string name="add">Add a Receipt:</string>
     <string name="delete">Delete a Receipt:</string>
     <string name="email">Email:</string>
+    <string name="app_key">butp5kslqn3b1ex</string>
+
 
 
     <string-array name="action_list">
@@ -42,7 +44,6 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="category_prompt">Enter category of receipt</string>
     <string name="total_prompt">Enter total of receipt</string>
     <string name="description_prompt">Enter description of receipt</string>

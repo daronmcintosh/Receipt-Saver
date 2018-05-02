@@ -2,7 +2,7 @@ package com.example.daron.receiptsaver;
 
 public class Receipt {
     private int _id;
-    private String name, category, description;
+    private String name, category, description, filename;
     private String date;
     private double total;
 
@@ -15,12 +15,13 @@ public class Receipt {
         this.description = description;
     }
 
-    public Receipt(String name, String category, String date, double total, String description) {
+    public Receipt(String name, String category, String date, double total, String description, String filename) {
         this.name = name;
         this.category = category;
         this.date = date;
         this.total = total;
         this.description = description;
+        this.filename = filename;
     }
 
     public int getId() {
@@ -47,5 +48,7 @@ public class Receipt {
         return total;
     }
 
-
+    public String getFilename() {
+        return filename;
+    }
 }

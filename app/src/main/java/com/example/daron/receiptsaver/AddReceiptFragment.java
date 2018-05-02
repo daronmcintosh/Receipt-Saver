@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -62,7 +61,7 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
                     date = dateView.getText().toString();
                     total = totalView.getText().toString();
                     description = descriptionView.getText().toString();
-                    Receipt newReceipt = new Receipt(name, category, date, Double.parseDouble(total), description);
+                    Receipt newReceipt = new Receipt(name, category, date, Double.parseDouble(total), description, "");
                     receiptDataSource.open();
                     receiptDataSource.createReceipt(newReceipt);
                     receiptDataSource.close();

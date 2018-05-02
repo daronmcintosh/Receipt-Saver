@@ -33,20 +33,22 @@ public class ReceiptDatabaseHelper extends SQLiteOpenHelper {
                     + "CATEGORY TEXT, "
                     + "DATE TEXT, "
                     + "TOTAL REAL, "
-                    + "DESCRIPTION TEXT);");
-            insertReceipt(db, "Walmart", "Grocery", "4/17/2018", 150.50, "Weekly grocery");
-            insertReceipt(db, "Chinese Restaurant", "Food", "4/14/2018", 25.20, "Takeout dinner");
-            insertReceipt(db, "Auto Shop", "Maintenance", "4/14/2018", 43.15, "Oil change");
+                    + "DESCRIPTION TEXT, "
+                    + "FILENAME TEXT);");
+            insertReceipt(db, "Walmart", "Grocery", "4/17/2018", 150.50, "Weekly grocery", "");
+            insertReceipt(db, "Chinese Restaurant", "Food", "4/14/2018", 25.20, "Takeout dinner", "");
+            insertReceipt(db, "Auto Shop", "Maintenance", "4/14/2018", 43.15, "Oil change", "");
         }
     }
 
-    public void insertReceipt(SQLiteDatabase db, String name, String category, String date, double total, String description) {
+    public void insertReceipt(SQLiteDatabase db, String name, String category, String date, double total, String description, String filename) {
         ContentValues receiptValues = new ContentValues();
         receiptValues.put("NAME", name);
         receiptValues.put("CATEGORY", category);
         receiptValues.put("DATE", date);
         receiptValues.put("TOTAL", total);
         receiptValues.put("DESCRIPTION", description);
+        receiptValues.put("FILENAME", filename);
         db.insert(TABLE_NAME, null, receiptValues);
     }
 }
