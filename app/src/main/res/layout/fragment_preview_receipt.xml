@@ -97,4 +97,13 @@
         </TableRow>
     </TableLayout>
 
+    <ImageView
+        android:id="@+id/previewReceipt"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:paddingLeft="40dp"
+        android:src="@drawable/logo" />
+
 </LinearLayout>
