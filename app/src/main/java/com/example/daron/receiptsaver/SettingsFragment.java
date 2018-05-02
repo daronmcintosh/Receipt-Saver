@@ -2,6 +2,7 @@ package com.example.daron.receiptsaver;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -25,6 +26,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             themePreference.setOnPreferenceChangeListener(this);
             fontPreference.setOnPreferenceChangeListener(this);
         }
+
+
     }
 
     @Override

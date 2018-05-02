@@ -60,7 +60,7 @@ public class LoginActivity extends DropboxActivity {
         new GetCurrentAccountTask(DropboxClientFactory.getClient(), new GetCurrentAccountTask.Callback() {
             @Override
             public void onComplete(FullAccount result) {
-                Toast.makeText(getApplicationContext(), "Signed in as: " + result.getEmail(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Signed in as:  " + result.getEmail(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

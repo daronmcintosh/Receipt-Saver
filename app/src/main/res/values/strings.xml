@@ -55,6 +55,8 @@
     <string name="password_prompt">Enter Password</string>
     <string name="logIn">DropBox Sign In</string>
     <string name="DropBoxInfo">Use your DropBox \n account to upload your \n receipts</string>
+    <string name="notLoggedIn">Not Signed Into DropBox</string>
+    <string name="version">Version 1.0</string>
 
 
 </resources>
