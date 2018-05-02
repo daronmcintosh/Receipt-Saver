@@ -1,11 +1,16 @@
 package com.example.daron.receiptsaver;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,6 +23,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.dropbox.core.v2.files.FileMetadata;
+import com.example.daron.receiptsaver.dropbox.DropboxClientFactory;
+import com.example.daron.receiptsaver.dropbox.UploadFileTask;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static android.app.Activity.RESULT_OK;
 
 
@@ -25,9 +39,10 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
 
     private final String LOG_TAG = this.getClass().getSimpleName();
     private ReceiptDataSource receiptDataSource;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_TAKE_PHOTO = 1;
     private EditText nameView, categoryView, dateView, totalView, descriptionView;
     private String name, category, date, total, description;
+    private String currentPhotoPath, filename;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +76,7 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
                     date = dateView.getText().toString();
                     total = totalView.getText().toString();
                     description = descriptionView.getText().toString();
-                    Receipt newReceipt = new Receipt(name, category, date, Double.parseDouble(total), description, "");
+                    Receipt newReceipt = new Receipt(name, category, date, Double.parseDouble(total), description, filename);
                     receiptDataSource.open();
                     receiptDataSource.createReceipt(newReceipt);
                     receiptDataSource.close();
@@ -82,21 +97,67 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
     // Used to take a photo
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                ex.printStackTrace();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getActivity(),
+                        "com.example.daron.receiptsaver.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
         }
     }
 
-    // Picture is displayed as a bitmap
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "receipt_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        filename = image.getName();
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageView imageView = (ImageView) getView().findViewById(R.id.picture);
-            imageView.setImageBitmap(imageBitmap);
-        }
+        uploadPhoto();
     }
+
+    public void uploadPhoto() {
+        File file = new File(currentPhotoPath);
+        Uri uri = Uri.fromFile(file);
+        new UploadFileTask(getContext(), DropboxClientFactory.getClient(), new UploadFileTask.Callback() {
+            @Override
+            public void onUploadComplete(FileMetadata result) {
+                deletePhotoFromDevice();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        }).execute(uri.toString(), "");
+    }
+
+    public void deletePhotoFromDevice(){
+        //TODO: delete photo from device
+    }
+
 
     public boolean textFieldsAreEmpty() {
         name = nameView.getText().toString();
