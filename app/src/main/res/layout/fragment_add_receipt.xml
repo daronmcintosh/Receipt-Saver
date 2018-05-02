@@ -126,14 +126,13 @@
         <ImageButton
             android:id="@+id/takeAPicture"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:contentDescription="@string/picture"
-            android:src="@drawable/ic_take_a_picture"
-            android:padding="20dp"/>
+            android:src="@drawable/ic_take_a_picture" />
         <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="@string/save" />
     </LinearLayout>
 
