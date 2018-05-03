@@ -35,18 +35,6 @@ public class ReceiptDatabaseHelper extends SQLiteOpenHelper {
                     + "TOTAL REAL, "
                     + "DESCRIPTION TEXT, "
                     + "FILENAME TEXT);");
-            insertReceipt(db, "PC", "Tech", "4/17/2018", 1000.50, "bought pc", "receipt_20180502_114609_2324920593427546734.jpg");
         }
-    }
-
-    public void insertReceipt(SQLiteDatabase db, String name, String category, String date, double total, String description, String filename) {
-        ContentValues receiptValues = new ContentValues();
-        receiptValues.put("NAME", name);
-        receiptValues.put("CATEGORY", category);
-        receiptValues.put("DATE", date);
-        receiptValues.put("TOTAL", total);
-        receiptValues.put("DESCRIPTION", description);
-        receiptValues.put("FILENAME", filename);
-        db.insert(TABLE_NAME, null, receiptValues);
     }
 }
