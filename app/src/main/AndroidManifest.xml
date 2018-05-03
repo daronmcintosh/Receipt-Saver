@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.daron.receiptsaver">
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -43,7 +45,8 @@
             android:name=".SettingsActivity"
             android:label="@string/settings"
             android:noHistory="true"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".HomeActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.daron.receiptsaver.fileprovider"
@@ -51,8 +54,11 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".loginTest.LoginTestActivity" />
+        <activity android:name=".loginTest.LoginActivity"></activity>
     </application>
 
 </manifest>

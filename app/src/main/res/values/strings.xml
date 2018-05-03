@@ -28,7 +28,6 @@
     <string name="euro">€</string>
 
 
-
     <string-array name="action_list">
         <item>Favorites</item>
     </string-array>

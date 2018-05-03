@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class LoginActivity extends DropboxActivity {
         }
     }
 
-      @Override
+    @Override
     protected void loadData() {
         new GetCurrentAccountTask(DropboxClientFactory.getClient(), new GetCurrentAccountTask.Callback() {
             @Override
@@ -47,8 +48,7 @@ public class LoginActivity extends DropboxActivity {
         }).execute();
     }
 
-    public void logInDropbox(View view){
+    public void logInDropbox(View view) {
         Auth.startOAuth2Authentication(LoginActivity.this, getString(R.string.app_key));
-
     }
 }

@@ -1,7 +1,5 @@
 package com.example.daron.receiptsaver;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
@@ -55,29 +53,4 @@ public class AddReceiptActivity extends AppCompatActivity {
             this.setTheme(R.style.FontCursive);
         }
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.actionbar_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        Intent intent;
-//        switch (item.getItemId()) {
-//            case R.id.action_settings:
-//                intent = new Intent(AddReceiptActivity.this, SettingsActivity.class);
-//                AddReceiptActivity.this.startActivity(intent);
-//                return true;
-//            case R.id.action_home:
-//                intent = new Intent(AddReceiptActivity.this, HomeActivity.class);
-//                AddReceiptActivity.this.startActivity(intent);
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-
 }
