@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -43,6 +44,7 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
     private EditText nameView, categoryView, dateView, totalView, descriptionView;
     private String name, category, date, total, description;
     private String currentPhotoPath, filename;
+    private ImageView receiptImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +64,7 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
         dateView = (EditText) view.findViewById(R.id.dateInput);
         totalView = (EditText) view.findViewById(R.id.totalInput);
         descriptionView = (EditText) view.findViewById(R.id.descriptionInput);
+        receiptImage = (ImageView) view.findViewById(R.id.receiptImage);
 
         return view;
     }
@@ -136,7 +139,33 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         uploadPhoto();
+        setPic();
     }
+
+    private void setPic() {
+        // Get the dimensions of the View
+        int targetW = receiptImage.getWidth();
+        int targetH = receiptImage.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
+        receiptImage.setImageBitmap(bitmap);
+    }
+
 
     public void uploadPhoto() {
         File file = new File(currentPhotoPath);

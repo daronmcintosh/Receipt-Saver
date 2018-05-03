@@ -13,6 +13,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     final static String THEME_KEY = "pref_syncTheme";
     final static String FONT_KEY = "pref_syncFont";
+    final static String CURRENCY_KEY = "pref_syncCurrency";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,22 +22,21 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         addPreferencesFromResource(R.xml.preferences);
         Preference themePreference = getPreferenceManager().findPreference(THEME_KEY);
         Preference fontPreference = getPreferenceManager().findPreference(FONT_KEY);
+        Preference currencyPreference = getPreferenceManager().findPreference(CURRENCY_KEY);
 
-        if (themePreference != null && fontPreference != null) {
+
+        if (themePreference != null && fontPreference != null && currencyPreference != null) {
             themePreference.setOnPreferenceChangeListener(this);
             fontPreference.setOnPreferenceChangeListener(this);
+            currencyPreference.setOnPreferenceChangeListener(this);
         }
-
-
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-
         Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
-
         return true;
     }
 }

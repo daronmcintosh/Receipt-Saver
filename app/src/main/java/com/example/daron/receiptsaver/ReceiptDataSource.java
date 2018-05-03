@@ -71,4 +71,15 @@ public class ReceiptDataSource {
             return null;
         }
     }
+    public Double getTotalExpenses() {
+        double total = 0;
+        Cursor cursor = database.rawQuery("SELECT SUM(TOTAL) FROM RECEIPTINFO", null);
+        if (cursor.moveToFirst()) {
+            total = cursor.getDouble(0);
+            return total;
+        }
+        cursor.close();
+        return total;
+    }
+
 }

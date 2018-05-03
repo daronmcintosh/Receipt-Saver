@@ -20,12 +20,6 @@ public class LoginActivity extends DropboxActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String theme = sharedPreferences.getString(SettingsFragment.THEME_KEY, "Light");
-        String font = sharedPreferences.getString(SettingsFragment.FONT_KEY, "Casual");
-        setApplicationTheme(theme);
-        setApplicationFont(font);
         setContentView(R.layout.activity_login);
     }
 
@@ -38,23 +32,7 @@ public class LoginActivity extends DropboxActivity {
         }
     }
 
-    public void setApplicationTheme(String theme) {
-        if (theme.equals("Light")) {
-            this.setTheme(R.style.Light);
-        } else if (theme.equals("Dark")) {
-            this.setTheme(R.style.Dark);
-        }
-    }
-
-    public void setApplicationFont(String font) {
-        if (font.equals("Casual")) {
-            this.setTheme(R.style.FontCasual);
-        } else if (font.equals("Cursive")) {
-            this.setTheme(R.style.FontCursive);
-        }
-    }
-
-    @Override
+      @Override
     protected void loadData() {
         new GetCurrentAccountTask(DropboxClientFactory.getClient(), new GetCurrentAccountTask.Callback() {
             @Override

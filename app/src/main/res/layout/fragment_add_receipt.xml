@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".AddReceiptFragment">
 
+
+
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -110,6 +112,12 @@
 
     </TableLayout>
 
+    <ImageView
+        android:id="@+id/receiptImage"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -119,16 +127,21 @@
 
         <ImageButton
             android:id="@+id/takeAPicture"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="50dp"
             android:contentDescription="@string/picture"
-            android:src="@drawable/ic_take_a_picture" />
+            android:src="@drawable/ic_take_a_picture"
+            android:background="@drawable/rectangle_rounded"
+            />
 
         <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/rectangle_rounded"
             android:text="@string/save" />
+
     </LinearLayout>
 
 

@@ -55,10 +55,12 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.actionbar_menu, menu);
         menu.findItem(R.id.action_delete).setVisible(false);
+        menu.findItem(R.id.action_share).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -77,12 +79,5 @@ public class HomeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.app_name);
     }
 }

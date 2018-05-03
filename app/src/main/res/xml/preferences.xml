@@ -8,7 +8,7 @@
         android:entryValues="@array/pref_themes_entries"
         android:key="pref_syncTheme"
         android:title="@string/pref_themes"
-        android:background="@drawable/rectangle_rounded" />
+        />
 
     <ListPreference
         android:defaultValue="@string/pref_font_default"
@@ -16,7 +16,6 @@
         android:entries="@array/pref_font_entries"
         android:entryValues="@array/pref_font_entries"
         android:key="pref_syncFont"
-        android:background="@drawable/rectangle_rounded"
         android:title="@string/pref_font" />
 
     <ListPreference
@@ -25,7 +24,6 @@
         android:entries="@array/pref_currency_entries"
         android:entryValues="@array/pref_currency_entries"
         android:key="pref_syncCurrency"
-        android:background="@drawable/rectangle_rounded"
         android:title="@string/pref_currency" />
 
 

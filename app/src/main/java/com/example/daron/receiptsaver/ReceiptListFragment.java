@@ -2,13 +2,17 @@ package com.example.daron.receiptsaver;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class ReceiptListFragment extends ListFragment {
     private final String LOG_TAG = this.getClass().getSimpleName();
 
@@ -25,12 +31,16 @@ public class ReceiptListFragment extends ListFragment {
     private Cursor receiptsCursor;
     private SQLiteOpenHelper databaseHelper;
     private ViewGroup viewGroup;
-
+    private ActionBar actionBar;
+    private ReceiptDataSource receiptDataSource;
+    private Context context;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
         databaseHelper = new ReceiptDatabaseHelper(context);
+        receiptDataSource = new ReceiptDataSource(context);
     }
 
     @Override
@@ -40,6 +50,14 @@ public class ReceiptListFragment extends ListFragment {
         if (container != null) {
             container.removeAllViews();
         }
+        PreferenceManager.setDefaultValues(context, R.xml.preferences, false);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String currency = sharedPreferences.getString(SettingsFragment.CURRENCY_KEY, "Dollar");
+
+
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        setApplicationCurrency(currency);
+
         try {
             db = databaseHelper.getReadableDatabase();
             receiptsCursor = db.query(ReceiptDatabaseHelper.TABLE_NAME,
@@ -53,6 +71,17 @@ public class ReceiptListFragment extends ListFragment {
             toast.show();
         }
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    public void setApplicationCurrency(String currency) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        receiptDataSource.open();
+        if (currency.equals("Dollar")) {
+            actionBar.setTitle("Total Expenses: " + getString(R.string.dollar) + df.format(receiptDataSource.getTotalExpenses()));
+        } else if (currency.equals("Euro")) {
+            actionBar.setTitle("Total Expenses: " + getString(R.string.euro) + df.format(receiptDataSource.getTotalExpenses()));
+        }
+        receiptDataSource.close();
     }
 
     @Override
@@ -71,5 +100,7 @@ public class ReceiptListFragment extends ListFragment {
 
         }
     }
+
+
 }
 

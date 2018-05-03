@@ -47,6 +47,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_settings);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new SettingsFragment())
@@ -86,6 +93,13 @@ public class SettingsActivity extends AppCompatActivity {
         } else if (font.equals("Cursive")) {
             this.setTheme(R.style.FontCursive);
         }
+    }
+
+    public void contactDevs(View view){
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.putExtra(Intent.EXTRA_EMAIL, "wedontwantyoutocontactus@noemail.com");
+        intent.setType("text/plain");
+        startActivity(Intent.createChooser(intent, "Send Email"));
     }
 
     @Override

@@ -10,10 +10,12 @@
 
     <style name="FontCasual">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">casual</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="FontCursive">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">cursive</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
 </resources>
