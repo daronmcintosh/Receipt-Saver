@@ -10,7 +10,7 @@ public class ReceiptTest {
 
     @Before
     public void setUp() throws Exception {
-        receipt = new Receipt("Walmart", "Grocery", "4/26/18", 22.22, "bought groceries");
+        receipt = new Receipt("Walmart", "Grocery", "4/26/18", 22.22, "bought groceries", "");
     }
     @Test
     public void getId() {

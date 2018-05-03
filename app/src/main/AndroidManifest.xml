@@ -57,8 +57,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".loginTest.LoginTestActivity" />
-        <activity android:name=".loginTest.LoginActivity"></activity>
+        <activity android:name=".loginTest.LoginActivity2" />
     </application>
 
 </manifest>
