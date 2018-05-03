@@ -6,13 +6,14 @@ public class Receipt {
     private String date;
     private double total;
 
-    public Receipt(int id, String name, String category, String date, double total, String description) {
+    public Receipt(int id, String name, String category, String date, double total, String description, String filename) {
         this._id = id;
         this.name = name;
         this.category = category;
         this.date = date;
         this.total = total;
         this.description = description;
+        this.filename = filename;
     }
 
     public Receipt(String name, String category, String date, double total, String description, String filename) {

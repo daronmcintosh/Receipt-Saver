@@ -28,7 +28,6 @@
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/category"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -49,7 +48,6 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
                 android:textAlignment="center"
                 android:textSize="18sp" />
         </TableRow>
@@ -69,7 +67,6 @@
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/total"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -91,19 +88,17 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/description"
                 android:textAlignment="center"
                 android:textSize="18sp" />
         </TableRow>
     </TableLayout>
 
     <ImageView
-        android:id="@+id/previewReceipt"
+        android:id="@+id/receiptImage"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        android:scaleType="fitXY"
         android:paddingLeft="40dp"
-        android:src="@drawable/logo" />
+        android:scaleType="fitXY" />
 
 </LinearLayout>

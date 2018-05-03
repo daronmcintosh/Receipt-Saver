@@ -2,51 +2,70 @@ package com.example.daron.receiptsaver;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.Metadata;
+import com.example.daron.receiptsaver.dropbox.DropboxClientFactory;
+import com.example.daron.receiptsaver.dropbox.FileThumbnailRequestHandler;
+import com.example.daron.receiptsaver.dropbox.PicassoClient;
+import com.squareup.picasso.Picasso;
+
 public class PreviewReceiptFragment extends Fragment {
-    ReceiptDataSource receiptDataSource;
-    Receipt receipt;
+    private final String LOG_TAG = PreviewReceiptFragment.class.getSimpleName();
+
+    private ReceiptDataSource receiptDataSource;
+    private Receipt receipt;
+    private ImageView receiptImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_preview_receipt, container, false);
-
         Bundle bundle;
         bundle = getArguments();
         int id = (int) bundle.getLong("id");
 
+        DbxClientV2 client = DropboxClientFactory.getClient();
+        PicassoClient.init(getContext(), client);
+
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+
         receiptDataSource = new ReceiptDataSource(view.getContext());
         receiptDataSource.open();
-
         receipt = receiptDataSource.getReceipt(id);
+        receiptDataSource.close();
+
         TextView total = (TextView) view.findViewById(R.id.total);
         TextView category = (TextView) view.findViewById(R.id.category);
         TextView date = (TextView) view.findViewById(R.id.date);
         TextView description = (TextView) view.findViewById(R.id.description);
+        receiptImage = (ImageView) view.findViewById(R.id.receiptImage);
         total.setText("$ " + Double.toString(receipt.getTotal()));
         category.setText(receipt.getCategory());
         date.setText(receipt.getDate());
         description.setText(receipt.getDescription());
 
-        actionBar.setTitle("Receipt Name: " + receipt.getName());
+        new FetchMetadata().execute(receipt.getFilename());
 
-        receiptDataSource.close();
+        actionBar.setTitle("Receipt Name: " + receipt.getName());
         setHasOptionsMenu(true);
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -71,6 +90,7 @@ public class PreviewReceiptFragment extends Fragment {
                 startActivity(intent);
                 return true;
             case R.id.action_delete:
+                new DeletePhoto().execute(receipt.getFilename());
                 receiptDataSource.open();
                 receiptDataSource.deleteReceipt(receipt);
                 receiptDataSource.close();
@@ -79,6 +99,67 @@ public class PreviewReceiptFragment extends Fragment {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // Fetch FileMetadata
+    private class FetchMetadata extends AsyncTask<String, Void, FileMetadata> {
+
+        private DbxClientV2 dbxClient;
+        private FileMetadata metadata;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            this.dbxClient = DropboxClientFactory.getClient();
+        }
+
+        @Override
+        protected FileMetadata doInBackground(String... filename) {
+            try {
+                metadata = (FileMetadata) dbxClient.files().getMetadata("/" + filename[0]);
+                Log.i(LOG_TAG, "Path of file is " + metadata.getPathLower());
+            } catch (DbxException e) {
+                e.printStackTrace();
+            }
+            return metadata;
+        }
+
+        @Override
+        protected void onPostExecute(FileMetadata fileMetadata) {
+            super.onPostExecute(fileMetadata);
+            Picasso picasso = PicassoClient.getPicasso();
+            picasso.load(FileThumbnailRequestHandler.buildPicassoUri(fileMetadata))
+                    .into(receiptImage);
+        }
+    }
+
+    // Delete file from dropbox
+    private class DeletePhoto extends AsyncTask<String, Void, Boolean> {
+
+        private DbxClientV2 dbxClient;
+        private Metadata metadata;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            this.dbxClient = DropboxClientFactory.getClient();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... filename) {
+            String path = "/" + filename[0];
+            try {
+                metadata = dbxClient.files().deleteV2(path).getMetadata();
+            } catch (DbxException e) {
+                e.printStackTrace();
+            }
+            Boolean deleted = path.equals(metadata.getPathLower());
+
+            if (deleted)
+                Log.i(LOG_TAG, "The file " + metadata.getName() + " was deleted");
+
+            return deleted;
         }
     }
 }

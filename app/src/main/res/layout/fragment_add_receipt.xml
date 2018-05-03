@@ -26,8 +26,8 @@
                 android:id="@+id/receiptNameInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/name_prompt" />
+                android:hint="@string/name_prompt"
+                android:inputType="text" />
         </TableRow>
 
 
@@ -46,8 +46,8 @@
                 android:id="@+id/categoryInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/category_prompt" />
+                android:hint="@string/category_prompt"
+                android:inputType="text" />
         </TableRow>
 
         <TableRow>
@@ -60,12 +60,13 @@
                 android:text="@string/date"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/dateInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="@string/category_prompt"/>
+                android:hint="@string/category_prompt"
+                android:inputType="date" />
         </TableRow>
 
         <TableRow>
@@ -78,12 +79,13 @@
                 android:text="@string/total"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/totalInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="@string/total_prompt"/>
+                android:hint="@string/total_prompt"
+                android:inputType="numberDecimal" />
         </TableRow>
 
         <TableRow>
@@ -96,26 +98,18 @@
                 android:text="@string/description"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/descriptionInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/description_prompt"/>
+                android:hint="@string/description_prompt"
+                android:inputType="text" />
         </TableRow>
 
 
     </TableLayout>
 
-
-    <ImageView
-        android:id="@+id/receiptPhoto"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/logo"
-        android:layout_gravity="center"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -129,6 +123,7 @@
             android:layout_height="50dp"
             android:contentDescription="@string/picture"
             android:src="@drawable/ic_take_a_picture" />
+
         <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"

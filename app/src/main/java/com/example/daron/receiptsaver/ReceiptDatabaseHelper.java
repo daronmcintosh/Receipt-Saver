@@ -35,9 +35,7 @@ public class ReceiptDatabaseHelper extends SQLiteOpenHelper {
                     + "TOTAL REAL, "
                     + "DESCRIPTION TEXT, "
                     + "FILENAME TEXT);");
-            insertReceipt(db, "Walmart", "Grocery", "4/17/2018", 150.50, "Weekly grocery", "");
-            insertReceipt(db, "Chinese Restaurant", "Food", "4/14/2018", 25.20, "Takeout dinner", "");
-            insertReceipt(db, "Auto Shop", "Maintenance", "4/14/2018", 43.15, "Oil change", "");
+            insertReceipt(db, "PC", "Tech", "4/17/2018", 1000.50, "bought pc", "receipt_20180502_114609_2324920593427546734.jpg");
         }
     }
 

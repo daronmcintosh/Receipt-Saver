@@ -61,7 +61,8 @@ public class ReceiptDataSource {
             String date = cursor.getString(cursor.getColumnIndex("DATE"));
             double total = cursor.getDouble(cursor.getColumnIndex("TOTAL"));
             String description = cursor.getString(cursor.getColumnIndex("DESCRIPTION"));
-            receipt = new Receipt(receiptId, name, category, date, total, description);
+            String filename = cursor.getString(cursor.getColumnIndex("FILENAME"));
+            receipt = new Receipt(receiptId, name, category, date, total, description, filename);
             cursor.close();
             return receipt;
         } catch (SQLiteException e) {

@@ -144,9 +144,9 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
         new UploadFileTask(getContext(), DropboxClientFactory.getClient(), new UploadFileTask.Callback() {
             @Override
             public void onUploadComplete(FileMetadata result) {
+                // since file is saved on dropbox, we don't want it to save on the device
                 deletePhotoFromDevice();
             }
-
             @Override
             public void onError(Exception e) {
 
@@ -154,8 +154,8 @@ public class AddReceiptFragment extends Fragment implements View.OnClickListener
         }).execute(uri.toString(), "");
     }
 
-    public void deletePhotoFromDevice(){
-        //TODO: delete photo from device
+    public boolean deletePhotoFromDevice(){
+        return new File(currentPhotoPath).delete();
     }
 
 
