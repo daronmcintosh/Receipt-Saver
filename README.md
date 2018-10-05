@@ -16,3 +16,7 @@ The best way to demo this app is to download and install it on your android devi
 [APK file](https://www.dropbox.com/s/rvxn23xzdmnkdy5/Receipt%20Saver.apk?dl=0)
 
 ## Built With
+* Java
+* XML
+* SQLite
+* Dropbox API
